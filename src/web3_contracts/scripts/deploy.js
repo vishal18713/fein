@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { ethers } = require('hardhat');
 
 async function main() {
   const SimpleStorage = await ethers.getContractFactory("SimpleStorage");

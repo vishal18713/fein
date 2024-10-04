@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/robin/code/test_hardhat/src/web3_contracts/contracts/SimpleStorage.sol": {
-      "lastModificationDate": 1727822961930,
+    "/home/robin/code/fein/src/web3_contracts/contracts/SimpleStorage.sol": {
+      "lastModificationDate": 1728051906819,
       "contentHash": "3878740ed6a6d72389264ff37eeca1c1",
       "sourceName": "src/web3_contracts/contracts/SimpleStorage.sol",
       "solcConfig": {

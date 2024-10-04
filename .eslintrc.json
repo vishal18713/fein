@@ -1,3 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "ignorePatterns": [
+    "src/web3_contracts/**/*", // Exclude web3_contracts folder from linting
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@next/next/no-img-element": "off" // Disable warnings about <img> tags
+  }
 }
