@@ -12,7 +12,7 @@ async function main() {
 }
 
 function saveFrontendFiles(contract, name) {
-  const contractsDir = path.join(__dirname, "../../contract_data/");
+  const contractsDir = path.join(__dirname, "../src/contract_data/");
 
   // Ensure the directory exists
   if (!fs.existsSync(contractsDir)) {
