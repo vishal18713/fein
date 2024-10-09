@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import ConnectWalletButton from '@/components/cta/ConnectWalletBtn'
-import GoToPortfolio from '../cta/GoToPortfolio'
+// import GoToPortfolio from '../cta/GoToPortfolio'
 
 // type Props = {}
 

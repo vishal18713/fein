@@ -5,7 +5,7 @@ import { logInUser } from '@/lib/actions/user.actions'; // Ensure the correct im
 
 const ConnectWalletButton = () => {
   const [account, setAccount] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
@@ -50,6 +50,17 @@ const ConnectWalletButton = () => {
 
       console.log("Connected", accounts[0]);
       setAccount(accounts[0]);
+      try {
+        if (account) {
+          await logInUser(account); // Call your Prisma function
+        } else {
+          console.error('Account is null');
+        }
+        console.log('User logged in or created successfully');
+      } catch (error) {
+        console.error('Error logging in user:', error);
+        alert('Failed to log in or create the user.');
+      }
     } catch (error) {
       console.log(error);
     }

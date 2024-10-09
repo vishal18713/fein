@@ -6,12 +6,9 @@ import SongFractionalizedAbi from '@/contract_data/SongFractionalized.json'
 import SongFractionalizedAddress from '@/contract_data/SongFractionalized-address.json'
 import { ethers } from 'ethers'
 
+const Testing = () => {
 
-type Props = {}
-
-const page = (props: Props) => {
-
-    const [walletAddress, setWalletAddress] = useState<string | null>(null);
+    // const [walletAddress, setWalletAddress] = useState<string | null>(null);
     const [contract, setContract] = useState<any>(null);
 
     useEffect(() => {
@@ -50,4 +47,4 @@ const page = (props: Props) => {
   )
 }
 
-export default page
+export default Testing
