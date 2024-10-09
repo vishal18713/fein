@@ -16,7 +16,7 @@ const Navbar = () => {
             <ConnectWalletButton />
         </div>
         <div className='flex items-center gap-6'>
-          <GoToPortfolio /> 
+          {/* <GoToPortfolio />  */}
           <div className='w-12 h-12 rounded-full bg-red-50'></div>
         </div>
     </div>

@@ -1,10 +1,17 @@
 const path = require("path");
 const fs = require("fs");
 const { ethers } = require('hardhat');
-
-
+const { JsonRpcProvider } = require('@ethersproject/providers');
 
 async function main() {
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying contracts with the account:", deployer.address);
+
+  const provider = new JsonRpcProvider("https://eth-sepolia.g.alchemy.com/v2/_3LaR8WP4c_tMAlD4WfkpUd4iOit1Mn3");
+  const blockNumber = "latest";
+  const block = await provider.getBlock(blockNumber);
+  console.log(block);
+
   const SongFractionalized = await ethers.getContractFactory("SongFractionalized");
   const songFractionalized = await SongFractionalized.deploy();
 
