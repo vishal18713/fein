@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/robin/code/fein/src/web3_contracts/contracts/SimpleStorage.sol": {
+    "/home/robin/code/fein/contracts/SimpleStorage.sol": {
       "lastModificationDate": 1728051906819,
       "contentHash": "3878740ed6a6d72389264ff37eeca1c1",
-      "sourceName": "src/web3_contracts/contracts/SimpleStorage.sol",
+      "sourceName": "contracts/SimpleStorage.sol",
       "solcConfig": {
         "version": "0.8.18",
         "settings": {
