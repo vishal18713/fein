@@ -5,7 +5,7 @@ require("hardhat/config");
 const path = require('path');
 
 module.exports = {
-  solidity: "0.8.18",
+  solidity: "0.8.20",
   paths: {
     sources: "./contracts",  // Contract source directory
     tests: "./test",         // Test files directory

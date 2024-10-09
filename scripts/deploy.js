@@ -2,13 +2,36 @@ const path = require("path");
 const fs = require("fs");
 const { ethers } = require('hardhat');
 
-async function main() {
-  const SimpleStorage = await ethers.getContractFactory("SimpleStorage");
-  const simpleStorage = await SimpleStorage.deploy();
 
-  await simpleStorage.deployed();
-  console.log("SimpleStorage deployed to:", simpleStorage.address);
-  saveFrontendFiles(simpleStorage, "SimpleStorage");
+
+async function main() {
+  const SongFractionalized = await ethers.getContractFactory("SongFractionalized");
+  const songFractionalized = await SongFractionalized.deploy();
+
+  await songFractionalized.deployed();
+  console.log("SongFractionalized deployed to:", songFractionalized.address);
+  saveFrontendFiles(songFractionalized, "SongFractionalized");
+
+  const SongEscrow = await ethers.getContractFactory("SongEscrow");
+  const songEscrow = await SongEscrow.deploy(songFractionalized.address);
+
+  await songEscrow.deployed();
+  console.log("songEscrow deployed to:", songEscrow.address);
+  saveFrontendFiles(songEscrow, "SongEscrow");
+
+  const FractionPurchase = await ethers.getContractFactory("FractionPurchase");
+  const fractionPurchase = await FractionPurchase.deploy(songFractionalized.address, songEscrow.address);
+
+  await fractionPurchase.deployed();
+  console.log("FractionPurchase deployed to:", fractionPurchase.address);
+  saveFrontendFiles(fractionPurchase, "FractionPurchase");
+
+  const SongRevenue = await ethers.getContractFactory("SongRevenue");
+  const songRevenue = await SongRevenue.deploy(songFractionalized.address);
+
+  await songRevenue.deployed();
+  console.log("SongRevenue deployed to:", songRevenue.address);
+  saveFrontendFiles(songRevenue, "SongRevenue");
 }
 
 function saveFrontendFiles(contract, name) {
