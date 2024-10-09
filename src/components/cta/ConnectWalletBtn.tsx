@@ -4,68 +4,74 @@ import React, { useState, useEffect } from 'react';
 import { logInUser } from '@/lib/actions/user.actions'; // Ensure the correct import
 
 const ConnectWalletButton = () => {
-  const [walletConnected, setWalletConnected] = useState(false);
-  const [walletAddress, setWalletAddress] = useState('');
-  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false);
-
+  const [account, setAccount] = useState(null);
+  // const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
-    const checkMetaMask = () => {
-      if (window.ethereum && window.ethereum.isMetaMask) {
-        setMetaMaskInstalled(true);
-      } else {
-        setMetaMaskInstalled(false);
-      }
-    };
-
-    checkMetaMask();
-    window.addEventListener('load', checkMetaMask);
-
-    return () => {
-      window.removeEventListener('load', checkMetaMask);
-    };
+    checkIfWalletIsConnected();
   }, []);
 
-  const connectToWallet = async () => {
-    if (metaMaskInstalled) {
-      try {
-        // Request account access if needed
-        const accounts = await window.ethereum?.request({
-          method: 'eth_requestAccounts',
-        });
+  const checkIfWalletIsConnected = async () => {
+    try {
+      const { ethereum } = window;
 
-        if (accounts && accounts.length > 0) {
-          const wallet = accounts[0];
-          setWalletAddress(wallet);
-          setWalletConnected(true);
-          console.log('Connected to wallet:', wallet);
-
-          // Try to log in or create the user
-          try {
-            await logInUser(wallet); // Call your Prisma function
-            console.log('User logged in or created successfully');
-          } catch (error) {
-            console.error('Error logging in user:', error);
-            alert('Failed to log in or create the user.');
-          }
-        } else {
-          alert('Please log into MetaMask and connect your wallet.');
-        }
-      } catch (error) {
-        console.error('Error connecting to wallet:', error);
-        alert('Failed to connect to the wallet. Please try again.');
+      if (!ethereum) {
+        console.log("Make sure you have MetaMask installed!");
+        return;
+      } else {
+        console.log("We have the ethereum object", ethereum);
       }
-    } else {
-      alert('MetaMask not found. Please install it.');
+
+      const accounts = await ethereum.request({ method: "eth_accounts" });
+
+      if (accounts.length !== 0) {
+        const account = accounts[0];
+        console.log("Found an authorized account:", account);
+        setAccount(account);
+      } else {
+        console.log("No authorized account found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      console.log("Connected", accounts[0]);
+      setAccount(accounts[0]);
+      try {
+        if (account) {
+          await logInUser(account); // Call your Prisma function
+        } else {
+          console.error('Account is null');
+        }
+        console.log('User logged in or created successfully');
+      } catch (error) {
+        console.error('Error logging in user:', error);
+        alert('Failed to log in or create the user.');
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div>
-      <button onClick={connectToWallet}>
-        {walletConnected ? `Wallet Connected: ${walletAddress}` : 'Connect MetaMask Wallet'}
-      </button>
-      {!metaMaskInstalled && (
-        <p>MetaMask is not installed. Please install the MetaMask extension.</p>
+      {account ? (
+        <p>Connected Account: {account}</p>
+      ) : (
+        <button onClick={connectWallet}>Connect Wallet</button>
       )}
     </div>
   );
