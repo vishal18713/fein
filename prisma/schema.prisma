@@ -24,6 +24,8 @@ model User {
   followers Follower[] @relation("UserFollowed")
   following Follower[] @relation("UserFollowing")
   likes Like[]
+  MintedTokens MintedTokens[]
+  boughtTokens boughtTokens[]
 }
 
 model UserInfo {
@@ -68,4 +70,27 @@ enum VerificationStatus {
   Verified
   UnVerified
   Processing
+}
+
+model MintedTokens {
+  id Int @id @default(autoincrement())
+  tokenId String @unique
+  tokenThumbail String
+  tokenName String
+  tokenDesc String
+  tokenPrice Int
+  avaibleToken Int
+  user User @relation(fields: [id], references: [id])
+  createdAt DateTime @default(now())
+  boughtTokens boughtTokens[]
+}
+
+model boughtTokens {
+  id Int @id @default(autoincrement())
+  tokenId String
+  userId Int
+  tokensBought Int
+  user User @relation(fields: [userId], references: [id])
+  mintedTokens MintedTokens @relation(fields: [tokenId], references: [tokenId])
+  createdAt DateTime @default(now())
 }
