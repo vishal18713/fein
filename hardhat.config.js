@@ -20,9 +20,9 @@ module.exports = {
     localhost: {
       url: "http://127.0.0.1:8545"
     },
-    // sepolia: {
-    //   url: "https://eth-sepolia.g.alchemy.com/v2/_3LaR8WP4c_tMAlD4WfkpUd4iOit1Mn3",
-    //   accounts: [`0x${process.env.SEPOLIA_PRIVATE_KEY}`] // Ensure you have your private key in an environment variable
-    // }
+    sepolia: {
+      url: "https://eth-sepolia.g.alchemy.com/v2/_3LaR8WP4c_tMAlD4WfkpUd4iOit1Mn3",
+      accounts: [`0x${process.env.SEPOLIA_PRIVATE_KEY}`] // Ensure you have your private key in an environment variable
+    }
   }
 };

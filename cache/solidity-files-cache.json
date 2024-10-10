@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/robin/code/fein/contracts/FractionPurchase.sol": {
-      "lastModificationDate": 1728436103706,
-      "contentHash": "d69ce83abbda0c904d1e28cae64a57dd",
-      "sourceName": "contracts/FractionPurchase.sol",
+    "/home/robin/code/fein/contracts/Fein.sol": {
+      "lastModificationDate": 1728587850324,
+      "contentHash": "a01a13a559f2f905a505392b0c038f8e",
+      "sourceName": "contracts/Fein.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
@@ -30,20 +30,20 @@
         }
       },
       "imports": [
-        "./SongFractionalized.sol",
-        "./SongEscrow.sol"
+        "@openzeppelin/contracts/utils/Strings.sol",
+        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "FractionPurchase"
+        "Fein"
       ]
     },
-    "/home/robin/code/fein/contracts/SongEscrow.sol": {
-      "lastModificationDate": 1728436103706,
-      "contentHash": "0367a4fb39549e83279d6dbca30a2d75",
-      "sourceName": "contracts/SongEscrow.sol",
+    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1728437430876,
+      "contentHash": "ba57ff4ddf1d9cae9d2009792795b7f6",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
@@ -69,90 +69,14 @@
         }
       },
       "imports": [
-        "./SongFractionalized.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "SongEscrow"
-      ]
-    },
-    "/home/robin/code/fein/contracts/SongFractionalized.sol": {
-      "lastModificationDate": 1728436103706,
-      "contentHash": "8e4f22df0bf2df2f196b4716863d2b47",
-      "sourceName": "contracts/SongFractionalized.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "SongFractionalized"
-      ]
-    },
-    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1728437430866,
-      "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
-      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../utils/Context.sol"
+        "./math/Math.sol",
+        "./math/SignedMath.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "Ownable"
+        "Strings"
       ]
     },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
@@ -199,6 +123,78 @@
         "ERC1155"
       ]
     },
+    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1728437430866,
+      "contentHash": "718fa8ba0ff269c92e364c1429d9de57",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Math"
+      ]
+    },
+    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
+      "lastModificationDate": 1728437430876,
+      "contentHash": "b6c6bdc7aaca4fe5b680760a72e09d3e",
+      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SignedMath"
+      ]
+    },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/Context.sol": {
       "lastModificationDate": 1728437430856,
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
@@ -233,6 +229,44 @@
       ],
       "artifacts": [
         "Context"
+      ]
+    },
+    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+      "lastModificationDate": 1728437430856,
+      "contentHash": "4aefc698f77ecbace7f401257dfe182d",
+      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC1155Errors",
+        "IERC20Errors",
+        "IERC721Errors"
       ]
     },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/Arrays.sol": {
@@ -274,44 +308,6 @@
         "Arrays"
       ]
     },
-    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1728437430856,
-      "contentHash": "4aefc698f77ecbace7f401257dfe182d",
-      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC1155Errors",
-        "IERC20Errors",
-        "IERC721Errors"
-      ]
-    },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
       "lastModificationDate": 1728437430856,
       "contentHash": "6a55c353946e471d9792965d06208295",
@@ -350,44 +346,6 @@
         "ERC165"
       ]
     },
-    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
-      "lastModificationDate": 1728437430866,
-      "contentHash": "d70aa5aeb17749b65a9bde4cce2bd72c",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC1155"
-      ]
-    },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
       "lastModificationDate": 1728437430866,
       "contentHash": "d14616defa6d417fafa47e416e3cec73",
@@ -424,6 +382,44 @@
       ],
       "artifacts": [
         "IERC1155Receiver"
+      ]
+    },
+    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+      "lastModificationDate": 1728437430866,
+      "contentHash": "d70aa5aeb17749b65a9bde4cce2bd72c",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC1155"
       ]
     },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
@@ -500,42 +496,6 @@
         "StorageSlot"
       ]
     },
-    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
-      "lastModificationDate": 1728437430866,
-      "contentHash": "718fa8ba0ff269c92e364c1429d9de57",
-      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Math"
-      ]
-    },
     "/home/robin/code/fein/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
       "lastModificationDate": 1728437430866,
       "contentHash": "de0163561b417b800d01749cbbe2147e",
@@ -572,8 +532,46 @@
         "IERC165"
       ]
     },
+    "/home/robin/code/fein/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1728437430866,
+      "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
     "/home/robin/code/fein/contracts/SongRevenue.sol": {
-      "lastModificationDate": 1728436103706,
+      "lastModificationDate": 1728477225320,
       "contentHash": "33543ba815be814c1cd62f49df7e3ecc",
       "sourceName": "contracts/SongRevenue.sol",
       "solcConfig": {
@@ -609,6 +607,122 @@
       ],
       "artifacts": [
         "SongRevenue"
+      ]
+    },
+    "/home/robin/code/fein/contracts/SongFractionalized.sol": {
+      "lastModificationDate": 1728477225320,
+      "contentHash": "8e4f22df0bf2df2f196b4716863d2b47",
+      "sourceName": "contracts/SongFractionalized.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SongFractionalized"
+      ]
+    },
+    "/home/robin/code/fein/contracts/SongEscrow.sol": {
+      "lastModificationDate": 1728477225320,
+      "contentHash": "0367a4fb39549e83279d6dbca30a2d75",
+      "sourceName": "contracts/SongEscrow.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SongFractionalized.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SongEscrow"
+      ]
+    },
+    "/home/robin/code/fein/contracts/FractionPurchase.sol": {
+      "lastModificationDate": 1728477225320,
+      "contentHash": "d69ce83abbda0c904d1e28cae64a57dd",
+      "sourceName": "contracts/FractionPurchase.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SongFractionalized.sol",
+        "./SongEscrow.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "FractionPurchase"
       ]
     }
   }
