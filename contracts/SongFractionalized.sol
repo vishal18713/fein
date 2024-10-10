@@ -33,7 +33,7 @@ contract SongFractionalized is ERC1155, Ownable {
         uint256 fractionPrice, 
         uint256 totalFractions
     ) external {
-        require(releaseTime > block.timestamp, "Release time must be in the future");
+        // require(releaseTime > block.timestamp, "Release time must be in the future");
 
         songCounter++;
         songs[songCounter] = Song(title, artistName, msg.sender, releaseTime, fractionPrice, totalFractions, false, true);

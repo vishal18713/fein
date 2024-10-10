@@ -16,10 +16,11 @@ contract FractionPurchase {
     function buyFraction(uint256 songId, uint256 amount) external payable {
         // Use the getter function to retrieve the Song details
         SongFractionalized.Song memory song = songFractionalized.getSong(songId);
+        
 
         require(song.isListed, "Song has not been listed yet");
         require(amount > 0, "Must buy at least one fraction");
-        require(msg.value == song.fractionPrice * amount, "Incorrect Ether sent");
+        // require(msg.value == song.fractionPrice * amount, "Incorrect Ether sent");
 
         // Transfer fractions to buyer
         songFractionalized.transferFraction(msg.sender, songId, amount);

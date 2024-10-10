@@ -10,7 +10,7 @@ async function main() {
   const provider = new JsonRpcProvider("https://eth-sepolia.g.alchemy.com/v2/_3LaR8WP4c_tMAlD4WfkpUd4iOit1Mn3");
   const blockNumber = "latest";
   const block = await provider.getBlock(blockNumber);
-  console.log(block);
+  // console.log(block);
 
   const SongFractionalized = await ethers.getContractFactory("SongFractionalized");
   const songFractionalized = await SongFractionalized.deploy();
@@ -39,6 +39,13 @@ async function main() {
   await songRevenue.deployed();
   console.log("SongRevenue deployed to:", songRevenue.address);
   saveFrontendFiles(songRevenue, "SongRevenue");
+
+  const Fein = await ethers.getContractFactory("Fein");
+  const fein = await Fein.deploy();
+
+  await fein.deployed();
+  console.log("Fein deployed to:", fein.address);
+  saveFrontendFiles(fein, "Fein");
 }
 
 function saveFrontendFiles(contract, name) {
