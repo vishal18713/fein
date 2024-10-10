@@ -40,6 +40,7 @@ const Testing = () => {
   const [totalFractionalAmount, setTotalFractionalAmount] = useState<bigint>(BigInt(0));
   const [percentageShare, setPercentageShare] = useState<bigint>(BigInt(0));
   const [tokenId, setTokenId] = useState<bigint>(BigInt(0));
+  const [revenue, setrevenue] = useState<bigint>(BigInt(0));
 
 
 
@@ -207,6 +208,70 @@ const Testing = () => {
     }
   }
 
+  const _artistTokenSales = async () => {
+    if(Fein){
+      try {
+
+        const tx = await Fein.artistTokenSales(tokenId);
+        await tx.wait();
+        console.log("Fraction purchased successfully");
+        
+      } catch (error) {
+        console.error('Error ', error);
+        
+      }
+    }
+  }
+
+  const _releaseSong = async () => {
+    if(Fein){
+      try {
+
+        const tx = await Fein.releaseSong(tokenId);
+        await tx.wait();
+        console.log("Fraction purchased successfully");
+        
+      } catch (error) {
+        console.error('Error ', error);
+        
+      }
+    }
+  }
+  // addRevenueGen
+
+  const _addRevenueGen = async () => {
+    if(Fein){
+      try {
+
+        const tx = await Fein.addRevenueGen(tokenId,{value:ethers.utils.parseEther(revenue.toString())});
+        await tx.wait();
+        console.log("Fraction purchased successfully");
+        
+      } catch (error) {
+        console.error('Error ', error);
+        
+      }
+    }
+  }
+
+  const _distributeRevenue = async () => {
+    if(Fein){
+      try {
+
+        const tx = await Fein.distributeRevenue(tokenId);
+        await tx.wait();
+        console.log("Fraction purchased successfully");
+        
+      } catch (error) {
+        console.error('Error ', error);
+        
+      }
+    }
+
+  }
+
+
+
 
   
  
@@ -217,6 +282,10 @@ const Testing = () => {
       <button onClick={_getSong}>Get Song</button>
       <button onClick={_buyFraction}>Buy Fraction</button>
       <button onClick={_particepents}>particepents</button>
+      <button onClick={_releaseSong}>releaseSong</button>
+      <button onClick={_artistTokenSales}>artistTokenSales</button>
+      <button onClick={_addRevenueGen}>addRevenueGen</button>
+      <button onClick={_distributeRevenue}>distributeRevenue</button>
       <div className='text-black'>
         {/* <input type="text" placeholder="title" onChange={(e) => setTitle(e.target.value)} />
         <input type="text" placeholder="artistName" onChange={(e) => setArtistName(e.target.value)} />
@@ -228,6 +297,10 @@ const Testing = () => {
         <input type="number" placeholder="totalSupply" onChange={(e) => setTotalSupply(BigInt(e.target.value))} />
         <input type="number" placeholder="totalFractionalAmount" onChange={(e) => setTotalFractionalAmount(BigInt(e.target.value))} />
         <input type="number" placeholder="percentageShare" onChange={(e) => setPercentageShare(BigInt(e.target.value))} />
+        {/* <input type="number" placeholder="tokenId" onChange={(e) => setTokenId(BigInt(e.target.value))} /> */}
+        {/* <input type="number" placeholder="tokenId" onChange={(e) => setTokenId(BigInt(e.target.value))} /> */}
+        <input type="number" placeholder="revenue" onChange={(e) => setrevenue(BigInt(e.target.value))} />
+
 
 
       </div>
