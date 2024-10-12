@@ -120,7 +120,7 @@ function buyStake(uint256 tokenId, uint256 number) external payable {
 
         fractionalOwnership[tokenId][msg.sender]++;
         tokenData[tokenId].fundsCollected += msg.value;
-        tokenData[tokenId].tokenSupply--;
+        tokenData[tokenId].tokenSupply-=number;
 
         emit StakePurchased(tokenId, msg.sender, 1, requiredAmount);
 
