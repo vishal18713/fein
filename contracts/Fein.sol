@@ -102,14 +102,14 @@ contract Fein is ERC1155 {
 function buyStake(uint256 tokenId, uint256 number) external payable {
         uint256 availableFraction = tokenData[tokenId].tokenSupply;
         require(tokenData[tokenId].soldOut == false, "Token is sold out");
-        // require(availableFraction > 0, "No fractional ownership available");
+        require(availableFraction > 0, "No fractional ownership available");
         require(
-            availableFraction >= number,
+            availableFraction >= 1,
             "Not enough fractional ownership available"
         );
 
         //uint256 pricePerToken = tokenData[tokenId].totalFractionalAmount / tokenData[tokenId].countoftotalsupply;
-        uint256 requiredAmount = tokenData[tokenId].pricePerToken*number;
+        uint256 requiredAmount = tokenData[tokenId].pricePerToken;
 
         // Ensure enough ETH is sent (should be handled by the front-end)
         require(msg.value >= requiredAmount, "Incorrect amount of ETH sent");
@@ -118,11 +118,11 @@ function buyStake(uint256 tokenId, uint256 number) external payable {
             participants[tokenId].push(msg.sender);
         }
 
-        fractionalOwnership[tokenId][msg.sender]+=number;
+        fractionalOwnership[tokenId][msg.sender]++;
         tokenData[tokenId].fundsCollected += msg.value;
-        tokenData[tokenId].tokenSupply-=number;
+        tokenData[tokenId].tokenSupply--;
 
-        emit StakePurchased(tokenId, msg.sender, number, requiredAmount);
+        emit StakePurchased(tokenId, msg.sender, 1, requiredAmount);
 
         // If all fractions are sold, mark as sold out
         if (tokenData[tokenId].tokenSupply == 0) {
