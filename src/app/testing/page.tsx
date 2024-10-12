@@ -4,15 +4,16 @@ import React, { useEffect, useState } from 'react';
 import FeinAddress from '@/contract_data/Fein-address.json';
 import FeinAbi from '@/contract_data/Fein.json';
 import { ethers, BigNumber } from 'ethers';
+import { buyToken, releaseSong } from '@/lib/actions/token.actions';
 
 const Testing = () => {
   const [Fein, setFein] = useState<any>(null);
   const [fractionPrice, setFractionPrice] = useState<BigNumber>(BigNumber.from(0));
-  const [songId, setSongId] = useState<BigNumber>(BigNumber.from(0));
+  const [songId] = useState<BigNumber>(BigNumber.from(1));
   const [totalSupply, setTotalSupply] = useState<BigNumber>(BigNumber.from(0));
   const [totalFractionalAmount, setTotalFractionalAmount] = useState<BigNumber>(BigNumber.from(0));
   const [percentageShare, setPercentageShare] = useState<BigNumber>(BigNumber.from(0));
-  const [tokenId, setTokenId] = useState<BigNumber>(BigNumber.from(0));
+  const [tokenId] = useState<BigNumber>(BigNumber.from(1));
   const [revenue, setRevenue] = useState<BigNumber>(BigNumber.from(0));
 
   useEffect(() => {
@@ -39,14 +40,15 @@ const Testing = () => {
     if (Fein) {
       try {
         const tx = await Fein.mintNFT(totalSupply, totalFractionalAmount, percentageShare);
-        await tx.wait();
-        console.log('Song listed:', tx);
+        const receipt = await tx.wait();
+        const event = receipt.events.find((event: { event: string; }) => event.event === 'NFTMinted');
+        const tokenId = event.args[0].toNumber();
+        console.log('Song listed with token ID:', tokenId);
       } catch (error) {
         console.error('Error listing song:', error);
       }
     }
   };
-
   const _getSong = async () => {
     if (Fein) {
       try {
@@ -63,7 +65,8 @@ const Testing = () => {
   const _buyFraction = async () => {
     if (Fein) {
       try {
-        const tx = await Fein.buyStake(tokenId, { value: fractionPrice });
+        console.log(tokenId.toString());
+        const tx = await Fein.buyStake(tokenId,1,{ value: fractionPrice });
         await tx.wait();
         console.log('Fraction purchased successfully');
       } catch (error: any) {
@@ -94,6 +97,14 @@ const Testing = () => {
       }
     }
   };
+  const web2release = async()=>{
+    try {
+      await releaseSong(0);
+      console.log("released")
+    } catch (error) {
+      console.log(error);
+    }  
+  }
 
   const _releaseSong = async () => {
     if (Fein) {
@@ -131,6 +142,18 @@ const Testing = () => {
     }
   };
 
+  const buyweb2 = async()=>{
+    try {
+        await buyToken({
+        accountAddress: "0x298023eE14e17f84f398CdA07295f05ca9a6e9d0",
+        tokenId: 0,
+        tokensBought: 1,
+      });
+    } catch (error) {
+      console.error('Error buying fraction:', error);
+    }
+  }
+
   return (
     <div>
       <div className='w-full flex gap-4'>
@@ -142,6 +165,8 @@ const Testing = () => {
       <button onClick={_artistTokenSales}>Artist Token Sales</button>
       <button onClick={_addRevenueGen}>Add Revenue</button>
       <button onClick={_distributeRevenue}>Distribute Revenue</button>
+      <button onClick={buyweb2}>but web2</button>
+      <button onClick={web2release}>web2 Release</button>
       </div>
 
       <div className="text-black">

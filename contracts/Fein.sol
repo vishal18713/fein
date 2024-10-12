@@ -51,12 +51,16 @@ contract Fein is ERC1155 {
         contractOwner = msg.sender;
     }
 
+    function getContractOwner() public view returns (address) {
+        return contractOwner;
+    }
+
     // Mint a new NFT representing a song with fractional ownership
     function mintNFT(
         uint256 _totalSupply,
         uint256 _totalFractionalAmount,
         uint256 _percentageShare
-    ) external {
+    ) external returns (uint256) {
         uint256 _id = currentTokenID;
 
         _mint(msg.sender, _id, _totalSupply, ""); // Mint one NFT with total supply representing fractions
@@ -81,6 +85,7 @@ contract Fein is ERC1155 {
             tokenData[_id].countoftotalsupply;
 
         emit NFTMinted(_id, msg.sender, _totalSupply, _totalFractionalAmount);
+        return _id;
     }
 
     // Set the URI for a specific token ID
@@ -94,17 +99,17 @@ contract Fein is ERC1155 {
     }
 
     // Buy stakes in an NFT by specifying the number of tokens
-    function buyStake(uint256 tokenId) external payable {
+function buyStake(uint256 tokenId, uint256 number) external payable {
         uint256 availableFraction = tokenData[tokenId].tokenSupply;
         require(tokenData[tokenId].soldOut == false, "Token is sold out");
-        require(availableFraction > 0, "No fractional ownership available");
+        // require(availableFraction > 0, "No fractional ownership available");
         require(
-            availableFraction >= 1,
+            availableFraction >= number,
             "Not enough fractional ownership available"
         );
 
         //uint256 pricePerToken = tokenData[tokenId].totalFractionalAmount / tokenData[tokenId].countoftotalsupply;
-        uint256 requiredAmount = tokenData[tokenId].pricePerToken;
+        uint256 requiredAmount = tokenData[tokenId].pricePerToken*number;
 
         // Ensure enough ETH is sent (should be handled by the front-end)
         require(msg.value >= requiredAmount, "Incorrect amount of ETH sent");
@@ -113,11 +118,11 @@ contract Fein is ERC1155 {
             participants[tokenId].push(msg.sender);
         }
 
-        fractionalOwnership[tokenId][msg.sender]++;
+        fractionalOwnership[tokenId][msg.sender]+=number;
         tokenData[tokenId].fundsCollected += msg.value;
-        tokenData[tokenId].tokenSupply--;
+        tokenData[tokenId].tokenSupply-=number;
 
-        emit StakePurchased(tokenId, msg.sender, 1, requiredAmount);
+        emit StakePurchased(tokenId, msg.sender, number, requiredAmount);
 
         // If all fractions are sold, mark as sold out
         if (tokenData[tokenId].tokenSupply == 0) {
@@ -127,7 +132,8 @@ contract Fein is ERC1155 {
 
     // Distribute revenue to all token holders based on their fractional ownership
     function distributeRevenue(uint256 tokenId) public payable onlyOwner {
-        uint256 amountToDistribute = (tokenData[tokenId].revenue * tokenData[tokenId].percentageShare) / 100;
+        uint256 amountToDistribute = (tokenData[tokenId].revenue *
+            tokenData[tokenId].percentageShare) / 100;
 
         require(
             tokenData[tokenId].isReleased == true,
@@ -177,7 +183,7 @@ contract Fein is ERC1155 {
     }
 
     // Release the song (after all NFTs are sold)
-    function releaseSong(uint256 tokenId) external onlyOwner {
+    function releaseSong(uint256 tokenId) external {
         require(
             tokenData[tokenId].isReleased == false,
             "Song is already released"
@@ -193,15 +199,15 @@ contract Fein is ERC1155 {
         );
     }
 
-function withdrawToOwner() public  payable  onlyOwner {
-    // Transfer all the Ether in the contract to the owner
-    
-}
+    function withdrawToOwner() public payable onlyOwner {
+        // Transfer all the Ether in the contract to the owner
+    }
 
-function getparticipants(uint _tokenId) public view  returns ( address[] memory ) {
-    return participants[_tokenId];
-    
-}
+    function getparticipants(
+        uint _tokenId
+    ) public view returns (address[] memory) {
+        return participants[_tokenId];
+    }
 
     modifier onlyOwner() {
         require(msg.sender == contractOwner, "Not the owner");
