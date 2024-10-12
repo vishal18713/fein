@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -24,8 +21,8 @@ model User {
   followers Follower[] @relation("UserFollowed")
   following Follower[] @relation("UserFollowing")
   likes Like[]
-  MintedTokens MintedTokens[]
-  boughtTokens boughtTokens[]
+  mintedTokens MintedToken[]  // Updated: renamed MintedTokens to mintedTokens for consistency
+  boughtTokens BoughtToken[]  // Updated: renamed boughtTokens to BoughtToken[]
 }
 
 model UserInfo {
@@ -42,10 +39,12 @@ model Song {
   name String
   thumbnail String
   songCid String
-  length String
-  totalListeningHrs BigInt
+  length Int  // Updated: changed from String to Int for easier arithmetic
+  totalListeningTime Int
   user User @relation(fields: [userId], references: [id])
   likes Like[]
+
+  @@index([userId])  // Updated: added index on userId for performance
 }
 
 model Like {
@@ -72,25 +71,32 @@ enum VerificationStatus {
   Processing
 }
 
-model MintedTokens {
+model MintedToken {  // Updated: renamed to MintedToken (singular) for clarity
   id Int @id @default(autoincrement())
-  tokenId String @unique
+  tokenId Int @unique
   tokenThumbail String
   tokenName String
   tokenDesc String
   tokenPrice Int
-  avaibleToken Int
-  user User @relation(fields: [id], references: [id])
+  tokensToMint Int
+  percentShare Int
+  isReleased Boolean @default(false)
+  availableToken Int?  // Updated: fixed typo 'avaibleToken' to 'availableToken'
+  userId Int  // Updated: added foreign key field userId
+  user User @relation(fields: [userId], references: [id])  // Updated: fixed relation to reference userId
   createdAt DateTime @default(now())
-  boughtTokens boughtTokens[]
+  boughtTokens BoughtToken[]  // Updated: renamed relation to BoughtToken[]
 }
 
-model boughtTokens {
+model BoughtToken {  // Updated: renamed to BoughtToken (singular) for clarity
   id Int @id @default(autoincrement())
-  tokenId String
-  userId Int
+  tokenId Int
+  accountAddress String
   tokensBought Int
-  user User @relation(fields: [userId], references: [id])
-  mintedTokens MintedTokens @relation(fields: [tokenId], references: [tokenId])
+  userId Int  // Updated: added userId field for stronger relational integrity
+  user User @relation(fields: [userId], references: [id])  // Updated: reference User by userId for consistency
+  mintedToken MintedToken @relation(fields: [tokenId], references: [tokenId])  // Updated: corrected naming
   createdAt DateTime @default(now())
+  @@index([tokenId])  // Updated: added index on tokenId for performance
+  @@index([userId])  // Updated: added index on userId for performance
 }

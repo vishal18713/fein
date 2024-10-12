@@ -5,9 +5,15 @@ module.exports = {
     config.module.rules.push({
       test: /\.js$/,
       include: /web3_contracts/,
-      use: 'ignore-loader'
+      use: 'null-loader'
     });
-    
+    config.module.rules.push({
+      test: /src\/testing\/page\.tsx$/,
+      use: 'null-loader',
+    });
     return config;
   },
+  images: {
+    domains: ['emerald-managerial-firefly-535.mypinata.cloud']
+  }
 };

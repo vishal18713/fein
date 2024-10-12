@@ -25,3 +25,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.tab-content {
+  transition: opacity 0.3s ease-in-out;
+}

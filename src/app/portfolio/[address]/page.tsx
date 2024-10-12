@@ -1,4 +1,5 @@
-import PortfolioClientComponent from '@/components/portfolio/PortfolioClientComponent';
+import TokenSection from '@/components/portfolio/TokenSection';
+import UserInformation from '@/components/portfolio/UserInformation';
 import prisma from '@/lib/prisma'; // Ensure the correct path
 
 export default async function PortfolioPage({ params }: { params: { address: string } }) {
@@ -18,6 +19,9 @@ export default async function PortfolioPage({ params }: { params: { address: str
   }
 
   return (
-    <PortfolioClientComponent user={user} />
+    <>
+      <UserInformation user={user} />
+      <TokenSection />
+    </>
   );
 }
