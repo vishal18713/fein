@@ -104,12 +104,12 @@ function buyStake(uint256 tokenId, uint256 number) external payable {
         require(tokenData[tokenId].soldOut == false, "Token is sold out");
         require(availableFraction > 0, "No fractional ownership available");
         require(
-            availableFraction >= 1,
+            availableFraction >= number,
             "Not enough fractional ownership available"
         );
 
         //uint256 pricePerToken = tokenData[tokenId].totalFractionalAmount / tokenData[tokenId].countoftotalsupply;
-        uint256 requiredAmount = tokenData[tokenId].pricePerToken;
+        uint256 requiredAmount = tokenData[tokenId].pricePerToken*number;
 
         // Ensure enough ETH is sent (should be handled by the front-end)
         require(msg.value >= requiredAmount, "Incorrect amount of ETH sent");
