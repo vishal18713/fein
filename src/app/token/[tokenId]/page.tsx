@@ -11,6 +11,7 @@ import FeinAddress from '@/contract_data/Fein-address.json';
 import FeinAbi from '@/contract_data/Fein.json';
 import { ethers } from 'ethers';
 import { buyToken } from '@/lib/actions/token.actions'; // Import the server action
+import { FaSpinner } from 'react-icons/fa';
 
 interface PageProps {
   params: {
@@ -36,6 +37,7 @@ const Page = ({ params }: PageProps) => {
   const [tokensToBuy, setTokensToBuy] = useState(1);
   const [Fein, setFein] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSoldOut, setIsSoldOut] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -63,6 +65,9 @@ const Page = ({ params }: PageProps) => {
         const res = await axios.post(`/api/getMintedTokensById`,{tokenId:tokenId});
         console.log(res.data);
         setTokenData(res.data.mintedToken);
+        if (res.data.mintedToken.availableToken === 0) {
+          setIsSoldOut(true);
+        }
       } catch (error) {
         console.error('Error fetching token:', error);
       }
@@ -118,11 +123,15 @@ const Page = ({ params }: PageProps) => {
   };
 
   if (!tokenData) {
-    return <div>Loading...</div>;
+    return (
+      <div className='bg-[#18181a] w-full min-h-screen text-[#5d5ece] flex items-center justify-center'>
+        <FaSpinner className="animate-spin text-4xl" />
+      </div>
+    );
   }
 
   return (
-    <div className='w-full flex min-h-screen px-72 text-white mt-12'>
+    <div className='w-full flex min-h-screen px-72 text-white bg-[#18181a] pt-12'>
       <div className='w-1/2 px-12'>
         <img src={`https://emerald-managerial-firefly-535.mypinata.cloud/ipfs/${tokenData.tokenThumbail}`} alt={tokenData.tokenName} className="w-full rounded-lg" />
         <div className='w-full flex mt-8'>
@@ -140,25 +149,31 @@ const Page = ({ params }: PageProps) => {
         <h1 className='text-3xl font-semibold'>{tokenData.tokenName}</h1>
         <p className='mt-4'> <span className='text-gray-400'> Artist </span><span className='text-blue-400 ml-2'>{tokenData.user.accountAddress.substr(0, 8) + "..."}</span></p>
         <p className='mt-2'>{tokenData.tokenDesc}</p>
-        <div className='w-full flex'>
-          <div className='w-1/2'>
-            <p className=' text-lg font-semibold mt-8'>Price</p>
+        <div className='w-full flex mt-8 gap-6 '>
+          <div className='w-1/2 px-4 py-4 rounded-lg bg-[#232328]'>
+            <p className=' text-lg font-semibold'>Price</p>
             <div className='flex items-center pt-4'>
               <FaEthereum className='text-lg' />
-              <p className='text-2xl ml-2'>{tokenData.tokenPrice}</p>
+              <p className='text-2xl ml-2'>{tokenData.tokenPrice/10000}</p>
             </div>
           </div>
-          <div>
-            <p className=' text-lg font-semibold mt-8'>Available Tokens</p>
+          <div className='w-1/2 px-4 py-4 rounded-lg bg-[#232328]'>
+            <p className=' text-lg font-semibold'>Available Tokens</p>
             <div className='flex items-center pt-4'>
               <MdToken className='text-lg' />
               <p className='text-2xl ml-2'>{tokenData.availableToken}</p>
             </div>
           </div>
         </div>
-        <div className='w-1/2 text-center bg-[#5d5ece] py-4 mt-8 rounded-lg font-semibold cursor-pointer' onClick={handleOpenDialog}>
-          Buy Now
-        </div>
+        {isSoldOut ? (
+          <div className='w-1/2 text-center bg-red-600 py-4 mt-8 rounded-lg font-semibold'>
+            Sold Out
+          </div>
+        ) : (
+          <div className='w-1/2 text-center bg-[#5d5ece] py-4 mt-8 rounded-lg font-semibold cursor-pointer' onClick={handleOpenDialog}>
+            Buy Now
+          </div>
+        )}
       </div>
 
       {isDialogOpen && (
@@ -178,12 +193,12 @@ const Page = ({ params }: PageProps) => {
               <p className='text-lg'>Total Amount</p>
               <div className='flex items-center mt-2'>
                 <FaEthereum className='text-lg' />
-                <p className='text-2xl ml-2'>{tokensToBuy * tokenData.tokenPrice}</p>
+                <p className='text-2xl ml-2'>{tokensToBuy * tokenData.tokenPrice/10000}</p>
               </div>
             </div>
             <div className='flex justify-end'>
-              <button className='bg-[#5d5ece] px-4 py-2 rounded' onClick={handleBuyNowClick} disabled={isLoading}>
-                {isLoading ? 'Loading...' : 'Confirm'}
+              <button className='bg-[#5d5ece] px-4 py-2 rounded-lg' onClick={handleBuyNowClick} disabled={isLoading}>
+                {isLoading ? <FaSpinner className="animate-spin text-[#5d5ece]" /> : 'Confirm'}
               </button>
             </div>
           </div>

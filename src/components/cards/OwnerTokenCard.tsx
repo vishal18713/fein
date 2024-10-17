@@ -89,7 +89,7 @@ const OwnerTokenCard = (props: Props) => {
                     <MdDiamond className='text-white' />
                 </div>
             </div>
-            {isReleased ? <button className="w-full text-center py-2 bg-green-500 font-semibold text-lg">
+            {isReleased ? <button className="w-full text-center py-2 bg-green-700 font-semibold text-lg">
                 Released
             </button> : <button className="w-full text-center py-2 bg-[#5b5bd5] font-semibold text-lg cursor-pointer" onClick={handleRelease}>
                 Release

@@ -122,7 +122,7 @@ function buyStake(uint256 tokenId, uint256 number) external payable {
         tokenData[tokenId].fundsCollected += msg.value;
         tokenData[tokenId].tokenSupply-=number;
 
-        emit StakePurchased(tokenId, msg.sender, 1, requiredAmount);
+        emit StakePurchased(tokenId, msg.sender, number, requiredAmount);
 
         // If all fractions are sold, mark as sold out
         if (tokenData[tokenId].tokenSupply == 0) {
