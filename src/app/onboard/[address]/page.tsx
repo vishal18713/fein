@@ -36,35 +36,35 @@ export default function OnboardingPage({ params }: { params: { address: string }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-6">
-      <div className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
+    <div className="min-h-screen bg-[#18181a] flex justify-center items-center p-6">
+      <div className="max-w-md w-full border border-gray-700 shadow-md rounded-lg px-8 py-12 mb-24">
         <h1 className="text-2xl font-bold mb-6">Onboard Your Profile</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+            <label className="block text-sm font-medium mb-2">Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full px-3 py-2 border bg-[#27282d] border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-[#5b5bd5] focus:border-[#5b5bd5]"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Instagram URL (Optional)</label>
+            <label className="block text-sm font-medium mb-2">Instagram URL <span className='text-[#5b5bd5]'> (Optional)</span></label>
             <input
               type="url"
               value={instaAccUrl}
               onChange={(e) => setInstaAccUrl(e.target.value)}
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full px-3 py-2 border bg-[#27282d] border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-[#5b5bd5] focus:border-[#5b5bd5]"
             />
           </div>
 
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+              className="w-full mt-8 bg-[#5b5bd5] text-white px-4 py-2 rounded-md hover:bg-[#7070ed] focus:outline-none"
               disabled={loading}
             >
               {loading ? 'Submitting...' : 'Submit'}

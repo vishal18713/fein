@@ -31,7 +31,10 @@ const Page = () => {
   }, []);
 
   return (
-    <div className='w-full min-h-screen mt-8 px-10'>
+    <div className='w-full min-h-screen pt-8 px-10 bg-[#18181a] '>
+      <div className='w-full mb-16 pt-3 px-6'>
+        <h1 className='text-3xl font-medium'>Trending Tokens</h1>
+      </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
         {tokens.map((token) => (
           <TokenCard

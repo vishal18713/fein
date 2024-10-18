@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import OwnerTokenCard from '../cards/OwnerTokenCard';
 
 const TokenSection = () => {
-  const [activeTab, setActiveTab] = useState('Items');
+  const [activeTab, setActiveTab] = useState('Minted Tokens');
   interface UserData {
     accountAddress: string;
     mintedTokens: {
@@ -59,7 +59,9 @@ const TokenSection = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'Items':
-        return <div>Items Content</div>;
+        return <div className='w-full flex justify-center pt-44'>
+          <p className='text-gray-500 text-lg'>No Items Available</p>
+        </div>;
       case 'Minted Tokens':
         return (
           <div className='w-full mt-6'>
@@ -77,33 +79,37 @@ const TokenSection = () => {
               ))}
             </div>
             <Link href={`/mint?address=${userData?.accountAddress}`}>
-              <button className='bg-blue-500 text-white px-4 py-2 rounded-xl mt-4'>Mint NFT</button>
+              <button className='bg-[#5b5bd5] text-white px-4 py-2 rounded-xl mt-4'>Mint Token</button>
             </Link>
           </div>
         );
       case 'Holdings':
-        return <div>Holdings Content</div>;
+        return <div className='w-full flex justify-center pt-44'>
+          <p className='text-gray-500 text-lg'>No Holdings Available</p>
+      </div>;
       case 'Activity':
-        return <div>Activity Content</div>;
+        return <div className='w-full flex justify-center pt-44'>
+          <p className='text-gray-500 text-lg'>No Recent Activity</p>
+      </div>;
       default:
         return null;
     }
   };
 
   return (
-    <div className='mx-24 my-6'>
+    <div className='px-24 py-6 min-h-screen bg-[#18181a]'>
       <div className='flex items-center gap-12'>
         {['Items', 'Minted Tokens', 'Holdings', 'Activity'].map(tab => (
           <p
             key={tab}
-            className={`cursor-pointer pb-2 ${activeTab === tab ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'}`}
+            className={`cursor-pointer pb-2 ${activeTab === tab ? 'text-[#5b5bd5] border-b-2 border-[#5b5bd5]' : 'text-white'}`}
             onClick={() => setActiveTab(tab)}
           >
             {tab}
           </p>
         ))}
       </div>
-      <div className='mt-4 p-4 border-t border-gray-200'>
+      <div className='mt-4 p-4 border-t border-gray-700'>
         {renderContent()}
       </div>
     </div>
