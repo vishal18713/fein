@@ -1,16 +1,16 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import FeinAddress from '@/contract_data/Fein-address.json';
-import FeinAbi from '@/contract_data/Fein.json';
+// import FeinAddress from '@/contract_data/Fein-address.json';
+// import FeinAbi from '@/contract_data/Fein.json';
 import { ethers } from 'ethers';
 import Loader from '../loader';
 import axios from 'axios';
 import AdminTokenCard from '@/components/cards/AdminTokenCard';
 
 const Page = () => {
-    const [Fein, setFein] = useState<any>(null);
-    const [adminAddress, setAdminAddress] = useState<string | null>(null);
+    // const [Fein, setFein] = useState<any>(null);
+    // const [adminAddress, setAdminAddress] = useState<string | null>(null);
     const [currentAddress, setCurrentAddress] = useState<string | null>(null);
     const [releasedTokens, setReleasedTokens] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -21,14 +21,15 @@ const Page = () => {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
                 const address = await signer.getAddress();
+                console.log('curr address', address);
                 setCurrentAddress(address);
 
-                const contractInstance5 = new ethers.Contract(
-                    FeinAddress.address,
-                    FeinAbi.abi,
-                    signer
-                );
-                setFein(contractInstance5);
+                // const contractInstance5 = new ethers.Contract(
+                //     FeinAddress.address,
+                //     FeinAbi.abi,
+                //     signer
+                // );
+                // setFein(contractInstance5);
             } else {
                 alert('MetaMask not detected. Please install MetaMask.');
             }
@@ -37,19 +38,19 @@ const Page = () => {
         init();
     }, []);
 
-    useEffect(() => {
-        const getOwner = async () => {
-            if (Fein) {
-                try {
-                    const res = await Fein.getContractOwner();
-                    setAdminAddress(res);
-                } catch (error) {
-                    console.error('Error fetching contract owner:', error);
-                }
-            }
-        }
-        getOwner();
-    }, [Fein]);
+    // useEffect(() => {
+    //     const getOwner = async () => {
+    //         if (Fein) {
+    //             try {
+    //                 const res = await Fein.getContractOwner();
+    //                 setAdminAddress(res);
+    //             } catch (error) {
+    //                 console.error('Error fetching contract owner:', error);
+    //             }
+    //         }
+    //     }
+    //     getOwner();
+    // }, [Fein]);
 
     useEffect(() => {
         const fetchTokens = async () => {
@@ -72,7 +73,7 @@ const Page = () => {
         return <Loader />;
     }
 
-    if (currentAddress !== adminAddress) {
+    if (currentAddress !== "0x25FA79cf8ae3A3573511c6db759833e454e091d3") {
         return (
             <div className="flex items-center justify-center h-screen">
                 <h1 className="text-3xl font-bold text-red-500">Access Denied</h1>
