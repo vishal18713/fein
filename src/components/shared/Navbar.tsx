@@ -1,19 +1,19 @@
 'use client'
 
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ConnectWalletButton from '@/components/cta/ConnectWalletBtn';
 import { MdDiamond } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
-import FeinAddress from '@/contract_data/Fein-address.json';
-import FeinAbi from '@/contract_data/Fein.json';
+// import FeinAddress from '@/contract_data/Fein-address.json';
+// import FeinAbi from '@/contract_data/Fein.json';
 import { ethers } from 'ethers';
 import GoToPortfolio from '../cta/GoToPortfolio';
 
 const Navbar = () => {
-  const [Fein, setFein] = useState<any>(null);
-  const [adminAddress, setAdminAddress] = useState<string | null>(null);
-  const [currentAddress, setCurrentAddress] = useState<string | null>(null);
+  // const [Fein, setFein] = useState<any>(null);
+  // const [adminAddress, setAdminAddress] = useState<string | null>(null);
+  // const [currentAddress, setCurrentAddress] = useState<string | null>(null);
 
   useEffect(() => {
     const init = async () => {
@@ -21,14 +21,15 @@ const Navbar = () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        setCurrentAddress(address);
+        console.log('curr address', address);
+        // setCurrentAddress(address);
 
-        const contractInstance5 = new ethers.Contract(
-          FeinAddress.address,
-          FeinAbi.abi,
-          signer
-        );
-        setFein(contractInstance5);
+        // const contractInstance5 = new ethers.Contract(
+        //   FeinAddress.address,
+        //   FeinAbi.abi,
+        //   signer
+        // );
+        // setFein(contractInstance5);
       } else {
         alert('MetaMask not detected. Please install MetaMask.');
       }
@@ -37,19 +38,20 @@ const Navbar = () => {
     init();
   }, []);
 
-  useEffect(() => {
-    const getOwner = async () => {
-      if (Fein) {
-        try {
-          const res = await Fein.getContractOwner();
-          setAdminAddress(res);
-        } catch (error) {
-          console.error('Error fetching contract owner:', error);
-        }
-      }
-    };
-    getOwner();
-  }, [Fein]);
+  // useEffect(() => {
+  //   const getOwner = async () => {
+  //     if (Fein) {
+  //       try {
+  //         const res = await Fein.getContractOwner();
+  //         console.log(res)
+  //         setAdminAddress(res);
+  //       } catch (error) {
+  //         console.error('Error fetching contract owner:', error);
+  //       }
+  //     }
+  //   };
+  //   getOwner();
+  // }, [Fein]);
 
   return (
     <div className="w-full h-[87px] border-b-[1px] border-gray-600 flex items-center px-16 bg-[#18181a] gap-44">
@@ -79,13 +81,13 @@ const Navbar = () => {
       <div className="flex items-center space-x-4">
         {/* Right elements */}
         <ConnectWalletButton />
-        {currentAddress === adminAddress && (
+        {/* {currentAddress === adminAddress && (
           <Link href="/admin">
             <button className="bg-[#5b5bd5] text-white px-4 py-2 rounded-xl shadow-lg border-2 border-transparent hover:border-gradient-to-r from-green-400 to-green-600 transition duration-300">
               Admin Page
             </button>
           </Link>
-        )}
+        )} */}
         <GoToPortfolio />
       </div>
     </div>
