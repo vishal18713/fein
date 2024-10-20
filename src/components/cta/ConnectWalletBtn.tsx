@@ -7,7 +7,7 @@ import { useState, useEffect, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { FaSpinner } from 'react-icons/fa';
-
+import { logInUser } from '@/lib/actions/user.actions';
 const ConnectWalletButton = () => {
   const router = useRouter();
   const [walletConnected, setWalletConnected] = useState(false);
@@ -57,6 +57,7 @@ const ConnectWalletButton = () => {
       setAddress(address);
       console.log('Connected with address:', address);
 
+      await logInUser(address);
       try {
         // Call API to generate JWT
         const response = await axios.post('/api/generateToken', { address }, {
@@ -70,7 +71,7 @@ const ConnectWalletButton = () => {
           localStorage.setItem('userToken', token);
           console.log('Token:', token);
 
-          // Refresh the page to update the state
+          // Redirect to the same page to refresh the state
           router.refresh();
         } else {
           console.error('Failed to generate token');
