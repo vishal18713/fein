@@ -17,6 +17,7 @@ const GoToPortfolio = () => {
 
           if (accounts.length > 0) {
             setWalletAddress(accounts[0]);
+            console.log('Wallet address:', accounts[0]);
           } else {
             alert('Please connect to MetaMask');
           }

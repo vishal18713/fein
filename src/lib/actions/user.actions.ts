@@ -15,7 +15,7 @@ export const logInUser = async (address: string):Promise<void> => {
       if (!userAccountAddress) {
         await prisma.user.create({
           data: {
-            accountAddress: address,
+          accountAddress: address,
           },
         });
         console.log('User created successfully');

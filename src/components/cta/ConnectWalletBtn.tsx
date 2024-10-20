@@ -57,7 +57,7 @@ const ConnectWalletButton = () => {
       setAddress(address);
       console.log('Connected with address:', address);
 
-      await logInUser(address);
+      await logInUser(address.toLowerCase());
       try {
         // Call API to generate JWT
         const response = await axios.post('/api/generateToken', { address }, {
