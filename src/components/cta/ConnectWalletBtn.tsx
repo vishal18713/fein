@@ -70,7 +70,7 @@ const ConnectWalletButton = () => {
           localStorage.setItem('userToken', token);
           console.log('Token:', token);
 
-          // Redirect to the same page to refresh the state
+          // Refresh the page to update the state
           router.refresh();
         } else {
           console.error('Failed to generate token');

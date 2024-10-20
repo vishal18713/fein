@@ -40,8 +40,12 @@ const Page = () => {
     useEffect(() => {
         const getOwner = async () => {
             if (Fein) {
-                const res = await Fein.getContractOwner();
-                setAdminAddress(res);
+                try {
+                    const res = await Fein.getContractOwner();
+                    setAdminAddress(res);
+                } catch (error) {
+                    console.error('Error fetching contract owner:', error);
+                }
             }
         }
         getOwner();
@@ -77,7 +81,7 @@ const Page = () => {
     }
 
     return (
-        <div className="p-8">
+        <div className="p-8 min-h-screen bg-[#18181a]">
             <h1 className="text-4xl font-bold mb-8">Admin Page</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-24">
                 {releasedTokens.map((token, index) => (
