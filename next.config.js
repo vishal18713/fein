@@ -15,5 +15,8 @@ module.exports = {
   },
   images: {
     domains: ['emerald-managerial-firefly-535.mypinata.cloud']
+  },
+  client:{
+    "log": ["query", "info", "warn", "error"]
   }
 };
