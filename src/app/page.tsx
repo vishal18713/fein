@@ -52,6 +52,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-4 mt-4">
               <Link href="collection">
+              
                 <button className="bg-[#5b5bd5] text-white px-4 py-2 rounded-lg">View Details</button>
               </Link>
             </div>
