@@ -40,6 +40,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-[#18181a] overflow-y-hidden text-white">
       <div className="w-full h-1/2 flex flex-col px-20 mt-8">
+      
         <h1 className="text-2xl font-semibold">Featured</h1>
         <div className="w-full mt-8 px-4 flex items-center gap-8">
           <img src="https://emerald-managerial-firefly-535.mypinata.cloud/ipfs/QmdnWJbbNzpMREVQR235RFmnYt4oKhwHKf98CQKYzzSxe9" alt="Featured Token" className="w-80 h-72 rounded-lg object-cover" />
