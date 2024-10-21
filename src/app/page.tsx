@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {formatDistanceToNow }from 'date-fns/formatDistanceToNow';
+import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
 import { FaEthereum } from 'react-icons/fa';
 import Link from 'next/link';
 
@@ -46,11 +46,13 @@ export default function Home() {
           <div className="flex flex-col justify-between h-72">
             <div>
               <h2 className="text-xl font-semibold">Featured</h2>
-              <p className="text-gray-400 mt-2 w-60">This is a brief description of the featured token. It provides some insights about the token and its unique features.</p>
+              <p className="text-gray-400 mt-2 w-60">
+                Discover the unique features of our featured token, a digital asset that combines rarity and value. This token offers exclusive benefits to its holders, including access to special events, early product releases, and more. Join the community of elite collectors and investors who recognize the potential of this exceptional token.
+              </p>
             </div>
             <div className="flex items-center gap-4 mt-4">
               <Link href="collection">
-              <button className="bg-[#5b5bd5] text-white px-4 py-2 rounded-lg">View Details</button>
+                <button className="bg-[#5b5bd5] text-white px-4 py-2 rounded-lg">View Details</button>
               </Link>
             </div>
           </div>
@@ -58,7 +60,7 @@ export default function Home() {
       </div>
       <div className="w-full h-1/2 flex flex-col px-20 mt-8">
         <h1 className="text-2xl font-semibold">Trending</h1>
-        <div className="w-full flex items-center mt-6 gap-6 text-lg">
+        <div className="w-full flex items-center mt-6 gap-6 text-lg cursor-pointer">
           <p className="border-[#5b5bd5] border-b-4">Collections</p>
           <p className="pb-2">Mints</p>
         </div>
@@ -89,7 +91,7 @@ export default function Home() {
                   </td>
                   <td className="p-4 border-b border-gray-600 text-center">
                     <div className="flex items-center justify-center gap-2">
-                      <div  className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
                       {token.user.userInfo.name}
                     </div>
                   </td>
