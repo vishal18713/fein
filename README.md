@@ -35,6 +35,9 @@ The platform gives artists direct access to their fans, allowing them to build s
 Both artists and fans can track and verify the flow of funds and staking rewards in realtime.
 
 
+### Contract Deployment Address
+- **0x10184FCB656731B62E49A43e38B92B54980B1041**
+- [basescan](https://sepolia.basescan.org/address/0x10184FCB656731B62E49A43e38B92B54980B1041)
 
 
 

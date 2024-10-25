@@ -82,7 +82,7 @@ const ConnectWalletButton = () => {
         setLoading(false);
       }
     } else {
-      alert('Please install MetaMask!');
+      // alert('Please install MetaMask!');
     }
   };
 

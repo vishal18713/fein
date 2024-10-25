@@ -19,14 +19,14 @@ const GoToPortfolio = () => {
             setWalletAddress(accounts[0]);
             console.log('Wallet address:', accounts[0]);
           } else {
-            alert('Please connect to MetaMask');
+            // alert('Please connect to MetaMask');
           }
         } catch (error) {
           console.error('Error fetching wallet address:', error);
-          alert('Failed to retrieve wallet address.');
+          // alert('Failed to retrieve wallet address.');
         }
       } else {
-        alert('Please install MetaMask.');
+        // alert('Please install MetaMask.');
       }
     };
 
