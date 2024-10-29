@@ -19,7 +19,7 @@ const Collections = () => {
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        const response = await fetch('/api/getMintedTokens');
+        const response = await fetch('/api/getMintedTokens',{cache: "no-store"});
         const data = await response.json();
         console.log(data)
         setTokens(data.mintedTokens);
