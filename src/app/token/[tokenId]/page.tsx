@@ -137,7 +137,7 @@ const Page = ({ params }: PageProps) => {
         <div className='w-full flex mt-8'>
           <div className='w-1/2 h-24 rounded-lg bg-[#232328] gap-1 flex flex-col px-4 pt-2'>
             <p className='text-sm opacity-60'>creater_name</p>
-            <p>{tokenData.user.userInfo.name}</p>
+            <p>{tokenData.user?.userInfo?.name !== undefined ? tokenData.user.userInfo.name : 'Artist'}</p>
             <Link className='flex items-center gap-2' href={`/portfolio/${tokenData.user.accountAddress}`}>
               <p className='text-blue-400'>{tokenData.user.accountAddress.substr(0, 8) + "..."}</p>
               <FaExternalLinkAlt className='text-blue-400 w-3' />

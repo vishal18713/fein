@@ -93,7 +93,7 @@ export default function Home() {
                   <td className="p-4 border-b border-gray-600 text-center">
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
-                      {token.user.userInfo.name ?? `Artist`}
+                      {token.user?.userInfo?.name !== undefined ? token.user.userInfo.name : 'Artist'}
                     </div>
                   </td>
                   <td className="p-4 border-b border-gray-600 text-center">{formatDistanceToNow(new Date(token.createdAt))} ago</td>
