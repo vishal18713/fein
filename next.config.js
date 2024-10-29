@@ -4,17 +4,17 @@ const { sources } = require("next/dist/compiled/webpack/webpack");
 const { headers } = require("next/headers");
 
 module.exports = {
-  headers: () => [
-    {
-      source: '/src/app',
-      headers: [
-        {
-          key: 'cache-control',
-          value: 'no-store'
-        }
-      ]
-    }
-  ],
+  // headers: () => [
+  //   {
+  //     source: '/src/app',
+  //     headers: [
+  //       {
+  //         key: 'cache-control',
+  //         value: 'no-store'
+  //       }
+  //     ]
+  //   }
+  // ],
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.js$/,
